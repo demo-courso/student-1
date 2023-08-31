@@ -10,8 +10,8 @@ type Todo = {
 
 const generateFakeTodoItem = (): Todo => ({
   label: faker.hacker.phrase(),
-  status: faker.random.arrayElement(['open', 'done', 'archived']),
-  id: faker.random.uuid(),
+  status: faker.helpers.arrayElement(['open', 'done', 'archived']),
+  id: faker.string.uuid(),
 });
 
 const generateNTodo = (size: number): Todo[] => {
@@ -22,17 +22,17 @@ const initialList: Todo[] = [
   {
     label: 'This is my first todo item',
     status: 'open',
-    id: faker.random.uuid(),
+    id: faker.string.uuid(),
   },
   {
     label: 'This is some done todo',
     status: 'done',
-    id: faker.random.uuid(),
+    id: faker.string.uuid(),
   },
   {
     label: 'This is a really old todo',
     status: 'archived',
-    id: faker.random.uuid(),
+    id: faker.string.uuid(),
   },
   ...generateNTodo(10),
 ];
