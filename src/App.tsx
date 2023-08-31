@@ -1,18 +1,24 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import { faker } from '@faker-js/faker';
 import clsx from "clsx";
 
-const generateFakeTodoItem = () => ({
+type Todo = {
+  label: string,
+  status: 'open' | 'done' | 'archived',
+  id: string;
+}
+
+const generateFakeTodoItem = (): Todo => ({
   label: faker.hacker.phrase(),
   status: faker.random.arrayElement(['open', 'done', 'archived']),
   id: faker.random.uuid(),
 });
 
-const generateNTodo = (size) => {
+const generateNTodo = (size: number): Todo[] => {
   return Array.from(Array(size).keys()).map(generateFakeTodoItem);
 };
 
-const initialList = [
+const initialList: Todo[] = [
   {
     label: 'This is my first todo item',
     status: 'open',
@@ -31,7 +37,11 @@ const initialList = [
   ...generateNTodo(10),
 ];
 
-const TodoItem = ({ status, label, onChecked }) => {
+type TodoItemProps = Pick<Todo, 'status' | 'label'> & {
+  onChecked: (status: Todo['status']) => void;
+}
+
+const TodoItem = ({ status, label, onChecked }: TodoItemProps) => {
   return (
     <div
       className={clsx('p-4 flex items-center', {
@@ -58,7 +68,7 @@ const TodoItem = ({ status, label, onChecked }) => {
 function App() {
   const [todoList, setTodoList] = useState(initialList);
 
-  const updater = (id, newStatus) => {
+  const updater = (id: Todo['id'], newStatus: Todo['status']) => {
     setTodoList((oldList) =>
       oldList.map((it) => {
         if (it.id !== id) {
