@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 const generateFakeTodoItem = () => ({
   label: faker.hacker.phrase(),
   status: faker.random.arrayElement(['open', 'done', 'archived']),
-  id: faker.string.uuid(),
+  id: faker.random.uuid(),
 });
 
 const generateNTodo = (size) => {
@@ -15,17 +15,17 @@ const initialList = [
   {
     label: 'This is my first todo item',
     status: 'open',
-    id: faker.string.uuid(),
+    id: faker.random.uuid(),
   },
   {
     label: 'This is some done todo',
     status: 'done',
-    id: faker.string.uuid(),
+    id: faker.random.uuid(),
   },
   {
     label: 'This is a really old todo',
     status: 'archived',
-    id: faker.string.uuid(),
+    id: faker.random.uuid(),
   },
   ...generateNTodo(10),
 ];
